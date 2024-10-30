@@ -1,69 +1,83 @@
 
-# Zichun Mini Project 1
+# Rust CLI Binary with SQLite
 
-This is a Python project template with a functioning `Makefile`, a `.devcontainer`, and basic setup for CI/CD using GitHub Actions. The project also includes unit tests and linting with `pylint`.
+## Overview
+This project is a Command-Line Interface (CLI) tool developed in Rust, designed to interact with an SQLite database. It demonstrates full CRUD operations (Create, Read, Update, Delete) within an optimized Rust binary, packaged and built through GitLab Actions.
 
-## Links
+## Features
+- **CRUD Operations:** Full support for managing data within an SQLite database.
+- **Optimized Binary:** An optimized binary is created and stored as a downloadable artifact in GitLab Actions.
+- **CI/CD Pipeline:** GitLab Actions handle building, linting, and testing for continuous integration.
+- **GitHub Copilot Assistance:** GitHub Copilot was used to streamline development and improve code efficiency. (See details in the [Copilot Usage](#github-copilot-usage) section below.)
 
-- **Version control Source Code Management Repository**: [github repo](https://github.com/nogibjj/zichun-miniproject-1).
-- **Link to successful CI/CD run**: [Link to GitHub Actions](https://github.com/nogibjj/zichun-miniproject-1/actions).
+## Requirements
+- **Rust** (latest stable version recommended)
+- **SQLite** (for database handling)
+- **Git** (for repository management)
+- **GitLab Account** (for CI/CD pipeline configuration)
 
+## Setup Instructions
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+   ```
 
-## Project Setup
+2. **Install Dependencies:**
+   Ensure you have Rust and SQLite installed. To install Rust:
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   source $HOME/.cargo/env
+   ```
 
-### 1. Clone the Repository
+3. **Compile and Run the Program:**
+   ```bash
+   cargo run --release
+   ```
 
+## Usage
+The CLI tool provides the following commands:
+- **Create**: Adds a new record to the SQLite database.
+- **Read**: Retrieves records from the database.
+- **Update**: Updates existing records.
+- **Delete**: Deletes records from the database.
+
+To use a specific command, run:
 ```bash
-git clone https://github.com/your-username/zichun-miniproject-1.git
-cd zichun-miniproject-1
+cargo run -- <command> [arguments]
 ```
 
-### 2. Install Dependencies
+### Examples
+- **Creating a Record**:
+  ```bash
+  cargo run -- create "Sample Record" "Additional Data"
+  ```
+- **Reading Records**:
+  ```bash
+  cargo run -- read
+  ```
+- **Updating a Record**:
+  ```bash
+  cargo run -- update <record_id> "Updated Data"
+  ```
+- **Deleting a Record**:
+  ```bash
+  cargo run -- delete <record_id>
+  ```
 
-You can install the required Python dependencies by running:
+## GitHub Copilot Usage
+GitHub Copilot provided intelligent code suggestions and helped optimize syntax. It assisted in:
+- Generating Rust-specific syntax for error handling and type safety.
+- Implementing initial CRUD logic and optimizing the database interaction flow.
+- Developing and fine-tuning the CI/CD configuration with GitLab Actions.
 
-```bash
-make setup
-```
+## GitLab Actions CI/CD Pipeline
+The CI/CD pipeline includes:
+1. **Linting**: Ensures the code meets Rust formatting standards.
+2. **Building**: Compiles the optimized Rust binary.
+3. **Testing**: Runs automated tests on the CRUD operations to verify functionality.
 
-This will install all the packages listed in `requirements.txt`.
+To view the CI/CD pipeline status, refer to the [GitLab Actions section](https://gitlab.com/username/repo/-/pipelines) in this repository.
 
-### 3. Running the Linter
-
-To ensure your code follows proper Python style guidelines, run:
-
-```bash
-make lint
-```
-
-This will run `pylint` on the `src/main.py` file.
-
-### 4. Running Tests
-
-To run the unit tests using `pytest`, use the following command:
-
-```bash
-make test
-```
-
-The `Makefile` is set up to run the tests in the `tests/` directory.
-
-## Usage Instructions
-
-The project contains a simple `add` function and a main script. You can run the main script as follows:
-
-```bash
-python src/main.py
-```
-
-The `main.py` file will print "Hello, world!" when executed.
-
-## CI/CD Pipeline
-
-This project uses GitHub Actions for Continuous Integration (CI). The workflow is defined in the `.github/workflows/ci.yml` file and runs automatically on every push to the main branch. The CI performs the following actions:
-- Linting with `pylint`
-- Running unit tests with `pytest`
-
-## Development Environment with Devcontainer
-
-A development container is included to ensure consistency in development environments. The `.devcontainer` folder contains a `Dockerfile` and `devcontainer.json` file for setting up the containerized development environment in tools like Visual Studio Code.
+## Video Demo
+Watch the [video demonstration](https://www.youtube.com/link-to-demo-video) on YouTube, which provides a walkthrough of the project’s functionality, setup, and code explanation.
