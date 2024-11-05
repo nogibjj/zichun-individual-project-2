@@ -18,8 +18,14 @@ fn main() -> Result<()> {
 
     // Step 2: Insert some categories and grocery items
     let mut grocery_items = HashMap::new();
-    grocery_items.insert(String::from("Fruits"), vec![("Apple", 1.2), ("Banana", 0.5)]);
-    grocery_items.insert(String::from("Vegetables"), vec![("Carrot", 0.8), ("Lettuce", 1.0)]);
+    grocery_items.insert(
+        String::from("Fruits"),
+        vec![("Apple", 1.2), ("Banana", 0.5)],
+    );
+    grocery_items.insert(
+        String::from("Vegetables"),
+        vec![("Carrot", 0.8), ("Lettuce", 1.0)],
+    );
     insert_data(&conn, &grocery_items)?;
 
     // Step 3: Read and display all grocery items
@@ -95,15 +101,16 @@ fn read_items(conn: &Connection) -> Result<Vec<GroceryItem>> {
          INNER JOIN categories c ON gi.category_id = c.id",
     )?;
 
-    let items = stmt.query_map([], |row| {
-        Ok(GroceryItem {
-            id: row.get(0)?,
-            name: row.get(1)?,
-            price: row.get(2)?,
-            category: row.get(3)?,
-        })
-    })?
-    .collect::<Result<Vec<_>>>()?;
+    let items = stmt
+        .query_map([], |row| {
+            Ok(GroceryItem {
+                id: row.get(0)?,
+                name: row.get(1)?,
+                price: row.get(2)?,
+                category: row.get(3)?,
+            })
+        })?
+        .collect::<Result<Vec<_>>>()?;
 
     Ok(items)
 }
