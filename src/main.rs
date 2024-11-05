@@ -1,6 +1,7 @@
-use rusqlite::{params, Connection, Result, NO_PARAMS};
+use rusqlite::{params, Connection, Result};
 use std::collections::HashMap;
 
+#[allow(dead_code)]
 #[derive(Debug)]
 struct GroceryItem {
     id: i32,
@@ -51,7 +52,7 @@ fn setup_database(conn: &Connection) -> Result<()> {
             id INTEGER PRIMARY KEY,
             name TEXT NOT NULL UNIQUE
         )",
-        NO_PARAMS,
+        [],
     )?;
     conn.execute(
         "CREATE TABLE IF NOT EXISTS grocery_items (
@@ -60,7 +61,7 @@ fn setup_database(conn: &Connection) -> Result<()> {
             price REAL NOT NULL,
             category_id INTEGER NOT NULL REFERENCES categories(id)
         )",
-        NO_PARAMS,
+        [],
     )?;
     println!("Tables created successfully.");
     Ok(())
@@ -71,7 +72,7 @@ fn insert_data(conn: &Connection, grocery_items: &HashMap<String, Vec<(&str, f64
     for (category, items) in grocery_items {
         conn.execute(
             "INSERT OR IGNORE INTO categories (name) VALUES (?1)",
-            &[&category.to_string()],
+            [&category.to_string()],
         )?;
         let category_id: i64 = conn.last_insert_rowid();
 
@@ -94,7 +95,7 @@ fn read_items(conn: &Connection) -> Result<Vec<GroceryItem>> {
          INNER JOIN categories c ON gi.category_id = c.id",
     )?;
 
-    let items = stmt.query_map(NO_PARAMS, |row| {
+    let items = stmt.query_map([], |row| {
         Ok(GroceryItem {
             id: row.get(0)?,
             name: row.get(1)?,
