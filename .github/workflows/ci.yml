@@ -1,4 +1,4 @@
-name: Python CI
+name: Rust CI
 
 on:
   push:
@@ -15,22 +15,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
         with:
-          python-version: '3.x'
+          rust-version: 'stable'
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+      - name: Build
+        run: cargo build --release
 
-      - name: Lint with pylint
-        run: |
-          pylint src/main.py
+      - name: Lint with Clippy
+        run: cargo clippy -- -D warnings
 
-      - name: Run tests
-        env:
-          PYTHONPATH: ${{ github.workspace }}/src  # Set PYTHONPATH to include src
-        run: |
-          pytest tests
+      - name: Format with rustfmt
+        run: cargo fmt -- --check
 
+      - name: Run Tests
+        run: cargo test

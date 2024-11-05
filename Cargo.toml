@@ -1,0 +1,8 @@
+[package]
+name = "rust_cli_with_sqlite"
+version = "0.1.0"
+edition = "2021"
+
+# Specify the dependencies for the project
+[dependencies]
+rusqlite = "0.28.0"  # For SQLite interaction
