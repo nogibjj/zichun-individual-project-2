@@ -80,4 +80,4 @@ The CI/CD pipeline includes:
 To view the CI/CD pipeline status, refer to the [GitLab Actions section](https://gitlab.com/username/repo/-/pipelines) in this repository.
 
 ## Video Demo
-Watch the [video demonstration](https://www.youtube.com/link-to-demo-video) on YouTube, which provides a walkthrough of the project’s functionality, setup, and code explanation.
+Watch the [video demonstration](https://youtu.be/hbMcd7iyyCI) on YouTube, which provides a walkthrough of the project’s functionality and code explanation.
