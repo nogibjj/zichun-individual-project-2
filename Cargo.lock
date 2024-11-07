@@ -118,13 +118,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "rust_cli_with_sqlite"
-version = "0.1.0"
-dependencies = [
- "rusqlite",
-]
-
-[[package]]
 name = "smallvec"
 version = "1.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -177,4 +170,11 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "zichun-individual-project-2"
+version = "0.1.0"
+dependencies = [
+ "rusqlite",
 ]

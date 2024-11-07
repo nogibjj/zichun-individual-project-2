@@ -142,3 +142,31 @@ fn delete_item(conn: &Connection, item_name: &str) -> Result<()> {
     }
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_database_connection() {
+        // This test simply verifies if we can open a connection to the database.
+        let conn = Connection::open_in_memory().expect("Failed to open database connection");
+        assert!(conn.is_autocommit());
+    }
+
+    #[test]
+    fn test_insert_and_read_data() {
+        // Testing if data can be inserted and then read.
+        let conn = Connection::open_in_memory().expect("Failed to open database connection");
+        
+        setup_database(&conn).expect("Failed to set up database");
+
+        let mut grocery_items = HashMap::new();
+        grocery_items.insert(String::from("Fruits"), vec![("Apple", 1.2)]);
+        insert_data(&conn, &grocery_items).expect("Failed to insert data");
+
+        let items = read_items(&conn).expect("Failed to read items");
+        assert_eq!(items.len(), 1);
+        assert_eq!(items[0].name, "Apple");
+    }
+}
