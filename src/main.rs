@@ -146,7 +146,7 @@ fn delete_item(conn: &Connection, item_name: &str) -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_database_connection() {
         // This test simply verifies if we can open a connection to the database.
@@ -158,7 +158,7 @@ mod tests {
     fn test_insert_and_read_data() {
         // Testing if data can be inserted and then read.
         let conn = Connection::open_in_memory().expect("Failed to open database connection");
-        
+
         setup_database(&conn).expect("Failed to set up database");
 
         let mut grocery_items = HashMap::new();
